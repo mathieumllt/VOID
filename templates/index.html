@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VOID</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap');
-
         * {
             margin: 0;
             padding: 0;
@@ -25,7 +23,6 @@
             overflow-x: hidden;
         }
 
-        /* WebGL Fractal Background */
         #fractalCanvas {
             position: fixed;
             top: 0;
@@ -35,7 +32,6 @@
             z-index: 0;
         }
 
-        /* Scanlines overlay */
         .scanlines {
             position: fixed;
             top: 0;
@@ -44,8 +40,8 @@
             height: 100%;
             background: repeating-linear-gradient(
                 0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
                 transparent 1px,
                 transparent 2px
             );
@@ -54,12 +50,9 @@
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.85);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
-            box-shadow: 
-                0 0 40px rgba(255, 255, 255, 0.1),
-                inset 0 0 30px rgba(0, 0, 0, 0.5);
             max-width: 650px;
             width: 100%;
             padding: 40px;
@@ -67,49 +60,14 @@
             z-index: 2;
         }
 
-        /* LOGO - B&W Enter the Void trash style */
+        /* LOGO - B&W Enter the Void */
         @keyframes flicker {
-            0%, 100% {
-                opacity: 1;
-            }
-            92% {
-                opacity: 1;
-            }
-            93% {
-                opacity: 0.8;
-            }
-            94% {
-                opacity: 1;
-            }
-            96% {
-                opacity: 0.6;
-            }
-            97% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes subtleGlitch {
-            0%, 100% {
-                transform: translate(0);
-                filter: blur(0);
-            }
-            97% {
-                transform: translate(0);
-                filter: blur(0);
-            }
-            97.5% {
-                transform: translate(-1px, 0);
-                filter: blur(0.5px);
-            }
-            98% {
-                transform: translate(1px, 0);
-                filter: blur(0);
-            }
-            98.5% {
-                transform: translate(0);
-                filter: blur(0.3px);
-            }
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.8; }
+            94% { opacity: 1; }
+            96% { opacity: 0.6; }
+            97% { opacity: 1; }
         }
 
         .logo {
@@ -119,113 +77,139 @@
             letter-spacing: 18px;
             text-transform: uppercase;
             color: #fff;
-            animation: flicker 8s infinite, subtleGlitch 4s infinite;
-            margin-bottom: 10px;
-            display: inline-block;
-            text-shadow: 
-                0 0 1px rgba(255, 255, 255, 0.5),
-                0 0 20px rgba(255, 255, 255, 0.1);
+            animation: flicker 8s infinite;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
         .subtitle {
-            color: #888;
-            margin-bottom: 30px;
-            font-size: 11px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 35px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+        }
+
+        .form-group.half {
+            flex: 1;
+            margin-bottom: 0;
         }
 
         label {
             display: block;
-            color: #fff;
-            font-weight: bold;
+            color: #888;
             margin-bottom: 8px;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            opacity: 0.7;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        input::placeholder {
+            color: #444;
         }
 
         textarea {
             width: 100%;
             padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             background: rgba(0, 0, 0, 0.5);
             color: #fff;
             font-family: 'Courier New', monospace;
-            font-size: 14px;
+            font-size: 13px;
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
             transition: all 0.3s;
         }
 
         textarea:focus {
             outline: none;
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         textarea::placeholder {
-            color: #555;
+            color: #444;
         }
 
         .char-count {
-            font-size: 10px;
-            color: #555;
+            font-size: 9px;
+            color: #444;
             margin-top: 8px;
             text-align: right;
             letter-spacing: 1px;
         }
 
-        button {
+        button[type="submit"] {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             background: #fff;
             color: #000;
             border: none;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 12px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
 
-        button:hover:not(:disabled) {
+        button[type="submit"]:hover:not(:disabled) {
             background: transparent;
             color: #fff;
-            box-shadow: inset 0 0 0 2px #fff;
+            box-shadow: inset 0 0 0 1px #fff;
         }
 
-        button:disabled {
+        button[type="submit"]:disabled {
             opacity: 0.3;
             cursor: not-allowed;
         }
 
         .message {
             margin-top: 20px;
-            padding: 15px;
-            font-size: 11px;
+            padding: 12px;
+            font-size: 10px;
             display: none;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         .message.success {
-            background: rgba(0, 255, 0, 0.1);
-            color: #0f0;
-            border: 1px solid rgba(0, 255, 0, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .message.error {
-            background: rgba(255, 0, 0, 0.1);
-            color: #f55;
-            border: 1px solid rgba(255, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.02);
+            color: #888;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .message.show {
@@ -236,8 +220,8 @@
             margin-top: 30px;
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 11px;
-            color: #666;
+            font-size: 10px;
+            color: #555;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -247,8 +231,8 @@
         }
 
         .ideas-list h3 {
-            font-size: 11px;
-            color: #555;
+            font-size: 10px;
+            color: #444;
             letter-spacing: 3px;
             margin-bottom: 15px;
             text-transform: uppercase;
@@ -261,91 +245,120 @@
             padding: 15px;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             transition: all 0.3s;
         }
 
         .idea-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .idea-content {
             flex: 1;
             padding-right: 20px;
+        }
+
+        .idea-text {
             font-size: 13px;
             line-height: 1.6;
             color: #ccc;
         }
 
-        .idea-time {
+        .idea-meta {
             font-size: 9px;
             color: #444;
             margin-top: 8px;
             letter-spacing: 1px;
         }
 
+        .idea-pseudo {
+            color: #666;
+        }
+
         .vote-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
+        }
+
+        /* Vote button with animation */
+        @keyframes votePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes voteGlow {
+            0% { box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+            50% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+            100% { box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
         }
 
         .vote-btn {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             padding: 0;
             background: transparent;
             color: #444;
             border: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            letter-spacing: 0;
         }
 
-        .vote-btn:hover:not(:disabled) {
+        .vote-btn:hover {
             color: #fff;
-            background: transparent;
-            box-shadow: none;
             border-color: rgba(255, 255, 255, 0.3);
         }
 
+        .vote-btn.active {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .vote-btn.voting {
+            animation: votePulse 0.3s ease-out, voteGlow 0.3s ease-out;
+        }
+
         .vote-btn.upvote.active {
-            color: #0f0;
-            border-color: rgba(0, 255, 0, 0.5);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .vote-btn.downvote.active {
-            color: #f0f;
-            border-color: rgba(255, 0, 255, 0.5);
+            color: #666;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .score {
-            font-weight: bold;
+            font-weight: 600;
             color: #555;
-            font-size: 12px;
+            font-size: 11px;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            min-width: 20px;
+            text-align: center;
         }
 
         .score.positive {
-            color: #0f0;
+            color: #fff;
         }
 
         .score.negative {
-            color: #f0f;
+            color: #444;
         }
 
         .restricted-message {
             display: none;
             padding: 15px;
-            background: rgba(255, 0, 255, 0.05);
-            border: 1px solid rgba(255, 0, 255, 0.2);
-            color: #f0f;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
             margin-bottom: 20px;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -361,10 +374,16 @@
             }
             .subtitle {
                 font-size: 9px;
-                letter-spacing: 2px;
             }
             .container {
                 padding: 25px;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .form-group.half {
+                margin-bottom: 0;
             }
         }
     </style>
@@ -379,16 +398,27 @@
             <p class="subtitle">Comme dirait Obispo : au fond, qu'est-ce qu'on ferait de plus</p>
 
             <div class="restricted-message" id="restrictedMessage">
-                ⚠ you already spoke once
+                tu as déjà parlé
             </div>
 
             <form id="ideaForm">
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="pseudo">pseudo (optionnel)</label>
+                        <input type="text" id="pseudo" name="pseudo" placeholder="anonyme" maxlength="30">
+                    </div>
+                    <div class="form-group half">
+                        <label for="age">âge (optionnel)</label>
+                        <input type="number" id="age" name="age" placeholder="—" min="1" max="120">
+                    </div>
+                </div>
+
                 <div class="form-group">
-                    <label for="idea">transmit:</label>
+                    <label for="idea">ton message</label>
                     <textarea 
                         id="idea" 
                         name="idea" 
-                        placeholder="your thought here..."
+                        placeholder="..."
                         required
                     ></textarea>
                     <div class="char-count">
@@ -396,27 +426,25 @@
                     </div>
                 </div>
 
-                <button type="submit" id="submitBtn">transmit</button>
+                <button type="submit" id="submitBtn">envoyer</button>
             </form>
 
             <div class="message" id="message"></div>
 
             <div class="stats" id="stats">
-                loading...
+                chargement...
             </div>
 
             <div class="ideas-list" id="ideasList"></div>
         </div>
     </div>
 
-    <!-- WebGL Fractal Shader -->
     <script>
-        // Fractal WebGL Background
+        // WebGL Fractal Background - B&W Enter the Void style
         const canvas = document.getElementById('fractalCanvas');
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
         if (gl) {
-            // Vertex Shader
             const vertexShaderSource = `
                 attribute vec2 a_position;
                 void main() {
@@ -424,7 +452,6 @@
                 }
             `;
 
-            // Fragment Shader - B&W Enter the Void style
             const fragmentShaderSource = `
                 precision highp float;
                 uniform vec2 u_resolution;
@@ -434,25 +461,18 @@
                     vec2 uv = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
                     vec2 uv0 = uv;
                     float finalColor = 0.0;
-
-                    float slowTime = u_time * 0.05;
+                    float slowTime = u_time * 0.04;
 
                     for (float i = 0.0; i < 3.0; i++) {
                         uv = fract(uv * 1.2) - 0.5;
-
-                        float d = length(uv) * exp(-length(uv0) * 0.6);
-
-                        d = sin(d * 5.0 + slowTime * 1.5 + i * 0.5) / 5.0;
+                        float d = length(uv) * exp(-length(uv0) * 0.5);
+                        d = sin(d * 4.0 + slowTime * 1.2 + i * 0.4) / 4.0;
                         d = abs(d);
-
-                        d = pow(0.006 / d, 0.9);
-
-                        finalColor += d * (0.3 - i * 0.08);
+                        d = pow(0.005 / d, 0.85);
+                        finalColor += d * (0.25 - i * 0.06);
                     }
 
-                    // Very subtle B&W, almost invisible
-                    finalColor = finalColor * 0.06;
-
+                    finalColor = finalColor * 0.04;
                     gl_FragColor = vec4(vec3(finalColor), 1.0);
                 }
             `;
@@ -462,76 +482,64 @@
                 gl.shaderSource(shader, source);
                 gl.compileShader(shader);
                 if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-                    console.error(gl.getShaderInfoLog(shader));
                     gl.deleteShader(shader);
                     return null;
                 }
                 return shader;
             }
 
-            function createProgram(gl, vertexShader, fragmentShader) {
+            function createProgram(gl, vs, fs) {
                 const program = gl.createProgram();
-                gl.attachShader(program, vertexShader);
-                gl.attachShader(program, fragmentShader);
+                gl.attachShader(program, vs);
+                gl.attachShader(program, fs);
                 gl.linkProgram(program);
                 if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-                    console.error(gl.getProgramInfoLog(program));
                     gl.deleteProgram(program);
                     return null;
                 }
                 return program;
             }
 
-            const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
-            const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
-            const program = createProgram(gl, vertexShader, fragmentShader);
+            const vs = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+            const fs = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+            const program = createProgram(gl, vs, fs);
 
-            const positionLocation = gl.getAttribLocation(program, 'a_position');
-            const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
-            const timeLocation = gl.getUniformLocation(program, 'u_time');
+            const posLoc = gl.getAttribLocation(program, 'a_position');
+            const resLoc = gl.getUniformLocation(program, 'u_resolution');
+            const timeLoc = gl.getUniformLocation(program, 'u_time');
 
-            const positionBuffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-                -1, -1,
-                 1, -1,
-                -1,  1,
-                -1,  1,
-                 1, -1,
-                 1,  1,
-            ]), gl.STATIC_DRAW);
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
 
             function resize() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 gl.viewport(0, 0, canvas.width, canvas.height);
             }
-
             window.addEventListener('resize', resize);
             resize();
 
-            let startTime = Date.now();
-
+            let start = Date.now();
             function render() {
-                const time = (Date.now() - startTime) / 1000;
-
+                const t = (Date.now() - start) / 1000;
                 gl.useProgram(program);
-                gl.enableVertexAttribArray(positionLocation);
-                gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-                gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-                gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
-                gl.uniform1f(timeLocation, time);
+                gl.enableVertexAttribArray(posLoc);
+                gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+                gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+                gl.uniform2f(resLoc, canvas.width, canvas.height);
+                gl.uniform1f(timeLoc, t);
                 gl.drawArrays(gl.TRIANGLES, 0, 6);
-
                 requestAnimationFrame(render);
             }
-
             render();
         }
 
         // App Logic
         const ideaForm = document.getElementById('ideaForm');
         const ideaTextarea = document.getElementById('idea');
+        const pseudoInput = document.getElementById('pseudo');
+        const ageInput = document.getElementById('age');
         const charCount = document.getElementById('charCount');
         const messageDiv = document.getElementById('message');
         const statsDiv = document.getElementById('stats');
@@ -547,12 +555,10 @@
             try {
                 const response = await fetch('/api/check-ip');
                 const data = await response.json();
-
                 if (data.has_submitted) {
                     restrictedMessage.classList.add('show');
                     ideaForm.style.display = 'none';
                 }
-
                 updateStats(data.total_ideas);
             } catch (error) {
                 console.error('error:', error);
@@ -561,30 +567,29 @@
 
         ideaForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
             const ideaText = ideaTextarea.value.trim();
+            const pseudo = pseudoInput.value.trim();
+            const age = ageInput.value ? parseInt(ageInput.value) : null;
 
             if (!ideaText) {
-                showMessage('empty transmission', 'error');
+                showMessage('message vide', 'error');
                 return;
             }
 
             submitBtn.disabled = true;
-            submitBtn.textContent = 'transmitting...';
+            submitBtn.textContent = 'envoi...';
 
             try {
                 const response = await fetch('/api/submit', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ idea: ideaText })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ idea: ideaText, pseudo: pseudo, age: age })
                 });
 
                 const data = await response.json();
 
                 if (data.success) {
-                    showMessage('transmission complete', 'success');
+                    showMessage('transmis', 'success');
                     ideaForm.reset();
                     charCount.textContent = '0';
                     restrictedMessage.classList.add('show');
@@ -595,48 +600,49 @@
                     showMessage(data.message, 'error');
                 }
             } catch (error) {
-                showMessage('transmission failed', 'error');
-                console.error('error:', error);
+                showMessage('erreur', 'error');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'transmit';
+                submitBtn.textContent = 'envoyer';
             }
         });
 
         function showMessage(text, type) {
             messageDiv.textContent = text;
             messageDiv.className = `message ${type} show`;
-            setTimeout(() => {
-                messageDiv.classList.remove('show');
-            }, 5000);
+            setTimeout(() => messageDiv.classList.remove('show'), 4000);
         }
 
-        function updateStats(totalIdeas) {
-            statsDiv.innerHTML = `${totalIdeas} voice${totalIdeas !== 1 ? 's' : ''} in the void`;
+        function updateStats(total) {
+            statsDiv.innerHTML = `${total} voix dans le void`;
         }
 
-        async function handleVote(ideaId, voteType, buttonElement) {
+        async function handleVote(ideaId, voteType, btn) {
+            // Add animation
+            btn.classList.add('voting');
+            setTimeout(() => btn.classList.remove('voting'), 300);
+
             try {
                 const response = await fetch('/api/vote', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
                         idea_id: ideaId, 
-                        vote: buttonElement.classList.contains('active') ? 0 : voteType
+                        vote: btn.classList.contains('active') ? 0 : voteType
                     })
                 });
 
                 const data = await response.json();
-
                 if (data.success) {
                     loadIdeas();
                 }
             } catch (error) {
-                console.error('error:', error);
+                console.error('vote error:', error);
             }
         }
+
+        // Make handleVote global
+        window.handleVote = handleVote;
 
         async function loadIdeas() {
             try {
@@ -648,28 +654,29 @@
                     return;
                 }
 
-                let html = '<h3>the void speaks</h3>';
+                let html = '<h3>void</h3>';
                 data.ideas.forEach(idea => {
-                    const date = new Date(idea.timestamp).toLocaleString('en-US', { 
-                        month: '2-digit', 
+                    const date = new Date(idea.timestamp).toLocaleDateString('fr-FR', { 
                         day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit'
+                        month: '2-digit'
                     });
                     const scoreClass = idea.score > 0 ? 'positive' : idea.score < 0 ? 'negative' : '';
-                    const upvoteActive = idea.user_vote === 1 ? 'active' : '';
-                    const downvoteActive = idea.user_vote === -1 ? 'active' : '';
+                    const upActive = idea.user_vote === 1 ? 'active' : '';
+                    const downActive = idea.user_vote === -1 ? 'active' : '';
+                    const ageDisplay = idea.age ? `, ${idea.age} ans` : '';
                     
                     html += `
                         <div class="idea-item">
                             <div class="idea-content">
-                                ${idea.text}
-                                <div class="idea-time">${date}</div>
+                                <div class="idea-text">${idea.text}</div>
+                                <div class="idea-meta">
+                                    <span class="idea-pseudo">${idea.pseudo}${ageDisplay}</span> · ${date}
+                                </div>
                             </div>
                             <div class="vote-section">
-                                <button class="vote-btn upvote ${upvoteActive}" onclick="handleVote('${idea.id}', 1, this)">▲</button>
+                                <button class="vote-btn upvote ${upActive}" onclick="handleVote(${idea.id}, 1, this)">▲</button>
                                 <span class="score ${scoreClass}">${idea.score}</span>
-                                <button class="vote-btn downvote ${downvoteActive}" onclick="handleVote('${idea.id}', -1, this)">▼</button>
+                                <button class="vote-btn downvote ${downActive}" onclick="handleVote(${idea.id}, -1, this)">▼</button>
                             </div>
                         </div>
                     `;
@@ -677,7 +684,7 @@
 
                 ideasListDiv.innerHTML = html;
             } catch (error) {
-                console.error('error:', error);
+                console.error('load error:', error);
             }
         }
 
