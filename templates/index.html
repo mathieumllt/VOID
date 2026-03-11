@@ -9,7 +9,90 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: url('data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAbABYDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAUHCAb/xAAsEAABAwIFAQcFAQAAAAAAAAABAgMEBREABhIhMQcIExQiQWGBFRYjUaFi/8QAFgEBAQEAAAAAAAAAAAAAAAAABAUG/8QAHREAAgMAAwEBAAAAAAAAAAAAAQMAAhIEESEiof/aAAwDAQACEQMRAD8ArPUbO9aHUSRRoFQkRY0QpRpaWU61EAkm3ubfGCdXMyphFbVZmlaRfyun+4nvXan1xjqNV2aRJ8O+t1t4ugEqLRQDt8845morrFcypT2H8xLdmsSVd6224nWoC2kqSTwN73vzjiW4WswnXXs0HEUCkfI/Jrnp7XfuHK0ScvZ/QEPD/Q2J+SDgxOezQ7U1Q6lCmTG5DUTQhK0AeZavMskjY8j+4MUV21UGQ3Uww1iztPUZun1Cl5wTLGp1YgOR1qAuLKUFJ9SRY3G/79DidU2JHNHXLflqVCH5DJ8XoWtIF9JCCPccDGhOrOVaDmd6jCuQPFiK48pkF5aAkqSEk2SoX223vids9J8gfUUpNCUpKV6ggzpBTe/NtdsFcjVuxHcblYp0fYl7NGfopzlW8tS4MiC6qIKg06Rdt9GpCCRtdJBKRbf14wYpGXckZXgZvTUIlL7qSmnLYC+/cICFOIURYqtylO9r7YMJUM0Agn20wmf/2Q==') 11 14, auto;
+            cursor: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           MAGNETIC CURSOR - Plus & Minus with repel effect
+           ═══════════════════════════════════════════════════════════ */
+        
+        .cursor-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .cursor-plus,
+        .cursor-minus {
+            position: absolute;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 200;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+            user-select: none;
+            will-change: transform, left, top;
+        }
+
+        .cursor-plus {
+            font-size: 42px;
+            color: #fff;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.3),
+                0 0 30px rgba(255, 255, 255, 0.1);
+            z-index: 10001;
+        }
+
+        .cursor-minus {
+            font-size: 36px;
+            color: rgba(255, 255, 255, 0.6);
+            text-shadow: 
+                0 0 8px rgba(255, 255, 255, 0.3),
+                0 0 15px rgba(255, 255, 255, 0.15);
+            z-index: 10000;
+            transition: 
+                left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                top 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.3s ease;
+        }
+
+        /* Hover states */
+        .cursor-plus.hovering {
+            transform: translate(-50%, -50%) scale(1.2);
+            text-shadow: 
+                0 0 15px rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(255, 255, 255, 0.5),
+                0 0 45px rgba(255, 255, 255, 0.3);
+        }
+
+        .cursor-minus.repelling {
+            opacity: 0.4;
+        }
+
+        /* Click animation */
+        @keyframes cursorPulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.4); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .cursor-plus.clicking {
+            animation: cursorPulse 0.2s ease-out;
+        }
+
+        @keyframes minusRepel {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(0.8); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .cursor-minus.clicking {
+            animation: minusRepel 0.3s ease-out;
         }
 
         body {
@@ -390,13 +473,21 @@
     </style>
 </head>
 <body>
+    <!-- ═══════════════════════════════════════════════════════════
+         MAGNETIC CURSOR - Plus follows mouse, Minus repels
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="cursor-container">
+        <div class="cursor-plus">+</div>
+        <div class="cursor-minus">−</div>
+    </div>
+
     <canvas id="fractalCanvas"></canvas>
     <div class="scanlines"></div>
 
     <div class="container">
         <div class="content">
             <div class="logo">VOID</div>
-            <p class="subtitle">Ơ̵̬̜͕̬̮͇̟̱̙͍͐̉̐͑́͆̔̔̅͝.̴̨̖͕̤̖̪̺̠̟̯͕̤̖̤̙̱̻̻͓̠̬̐̾͋̊̎͒́̀̾̏͠͠ ̶̢̡̢͔̘̬̠͓̻̗͙̄́͒͂̂̎̆̈̓͜P̵̢̡̤̠͈̫̦̝̞̹͆̈́̒̋̓̌̇̈́.̴̡̨̞̱͚͍̗͙̞͉̘̠̜͚̰̳̹̖̹̂̽̔̌͂̀̐̑̃̽̈́̏̚̚͜͝͠ͅ ̴̧̡̛̱͍̩̭͕̙̩̤͚͍̗̹͐̂̓̔͋̽̈́̓͜͝ ̴̢͔̘͍͓̱̣͓̣̫͚͚̫̠̰̹̖̿́̏́̓̕̕͝ͅS̵̠̝̙͋͋͛́͑̂͜.̸̰̠̻̻͖̼͑̅̉̊̈́̈̉̀̽̒͋͛͐̕͝ ̴̺̜̫̘̲̼̯̗̹̘̙͉̍͗̊̽̓͛̈̄̆̓̔͑̌̊͌͐͝͝ ̴̫̞̼͑̓̈́́̚͝ ̶̡̛̬̄͗̈́̎̇͂̄̊͛͌̓̌͗͗͆͛̚͝͝Į̴̨̡̫̦͇̲̖̻̻͓̻͎͉̝̱̟̘̤̩͌̍̃̓̐̑̄̽̑̈́̃͛͊͗̀̊̎̈́̄͝͠ͅ.̶͍̲̣͔͙̩̟͇̣͖̼̦̱̳̳̰̥̫̻̂̒̄͊́͒͘ ̶̛͖̬̊̉͊́̎̉̇̇͆̃͋̓͊̈́͝ ̵̢̢̛̗͖̼̥͓̙̥̖̘́̄̍͋̈́̿̔ ̸̛͙̙̼̍͐̄̀͛͛̇̋͂͘͘̕͝͝ ̵̤͕̪͇͎̖̪̮̬̘̦̺͙̩͓̠̠̻̐̅̎̂̔̀̋̎̆̈́̓͆͊͐̚͜ͅͅͅB̴̧̨͔̬͉͕̪̺̪̩͎͎̞̪̓̽̈́̄͛̓̈́̍́̾̌̃̈́̚͝ͅͅ.̵̻̤͙̲͚̻̝̰̩̫͎͔͓͔͉̬̎͐͜ ̸̤͕̗̞̙̦̦̋͛̄̾̐͌͂͒͜͝͝ ̷̛͙̌̑͘ ̸̢̡̧͙͓͚͇̲͖̭͎̞͓̲̫͇̝͓̈́̽̾̈́̏͜͝ͅ ̵̧̛̛͖̞̜̫̩͈͙̮̪̭̈́̑͛̐͂̋̊̓̓̏̈́̈́Ô̴̡̰̩̻̹̩̱̟͎̜̦̩͕̟̿́̅͗̈́̆͒̏̌̓̕̚̕͝</p>
+            <p class="subtitle">Comme dirait Obispo : au fond, qu'est-ce qu'on ferait de plus</p>
 
             <div class="restricted-message" id="restrictedMessage">
                 tu as déjà parlé
@@ -692,6 +783,128 @@
         checkIpStatus();
         loadIdeas();
         setInterval(loadIdeas, 10000);
+
+        /* ═══════════════════════════════════════════════════════════
+           MAGNETIC CURSOR SYSTEM
+           Plus (+) follows the mouse
+           Minus (−) repels away from Plus with magnetic effect
+           ═══════════════════════════════════════════════════════════ */
+        
+        const cursorPlus = document.querySelector('.cursor-plus');
+        const cursorMinus = document.querySelector('.cursor-minus');
+        
+        // Cursor state
+        const cursor = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2,
+            plusX: window.innerWidth / 2,
+            plusY: window.innerHeight / 2,
+            minusX: window.innerWidth / 2 + 60,
+            minusY: window.innerHeight / 2,
+            repelDistance: 50,
+            repelStrength: 0.15,
+            isHovering: false
+        };
+
+        // Smooth animation with requestAnimationFrame
+        function updateCursor() {
+            // Smooth follow for plus (main cursor)
+            cursor.plusX += (cursor.x - cursor.plusX) * 0.2;
+            cursor.plusY += (cursor.y - cursor.plusY) * 0.2;
+
+            // Calculate repel vector (minus runs away from plus)
+            const dx = cursor.minusX - cursor.plusX;
+            const dy = cursor.minusY - cursor.plusY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // Normalize and apply repel force
+            if (distance < cursor.repelDistance * 3) {
+                const force = (1 - distance / (cursor.repelDistance * 3)) * cursor.repelStrength;
+                const normalX = dx / (distance || 1);
+                const normalY = dy / (distance || 1);
+                
+                cursor.minusX += normalX * cursor.repelDistance * force;
+                cursor.minusY += normalY * cursor.repelDistance * force;
+                
+                cursorMinus.classList.add('repelling');
+            } else {
+                cursorMinus.classList.remove('repelling');
+            }
+
+            // Keep minus orbiting loosely around plus when far
+            const targetOrbitX = cursor.plusX + Math.cos(Date.now() * 0.001) * 70;
+            const targetOrbitY = cursor.plusY + Math.sin(Date.now() * 0.001) * 70;
+            
+            cursor.minusX += (targetOrbitX - cursor.minusX) * 0.02;
+            cursor.minusY += (targetOrbitY - cursor.minusY) * 0.02;
+
+            // Boundary constraints
+            cursor.minusX = Math.max(20, Math.min(window.innerWidth - 20, cursor.minusX));
+            cursor.minusY = Math.max(20, Math.min(window.innerHeight - 20, cursor.minusY));
+
+            // Apply positions
+            cursorPlus.style.left = cursor.plusX + 'px';
+            cursorPlus.style.top = cursor.plusY + 'px';
+            cursorMinus.style.left = cursor.minusX + 'px';
+            cursorMinus.style.top = cursor.minusY + 'px';
+
+            requestAnimationFrame(updateCursor);
+        }
+
+        // Mouse move handler
+        document.addEventListener('mousemove', (e) => {
+            cursor.x = e.clientX;
+            cursor.y = e.clientY;
+        });
+
+        // Click effect
+        document.addEventListener('mousedown', () => {
+            cursorPlus.classList.add('clicking');
+            cursorMinus.classList.add('clicking');
+            
+            // Strong repel on click
+            const dx = cursor.minusX - cursor.plusX;
+            const dy = cursor.minusY - cursor.plusY;
+            const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+            cursor.minusX += (dx / distance) * 40;
+            cursor.minusY += (dy / distance) * 40;
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursorPlus.classList.remove('clicking');
+            cursorMinus.classList.remove('clicking');
+        });
+
+        // Hover detection for interactive elements
+        const interactiveElements = 'a, button, input, textarea, [onclick]';
+        
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.matches(interactiveElements) || e.target.closest(interactiveElements)) {
+                cursorPlus.classList.add('hovering');
+                cursor.isHovering = true;
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.matches(interactiveElements) || e.target.closest(interactiveElements)) {
+                cursorPlus.classList.remove('hovering');
+                cursor.isHovering = false;
+            }
+        });
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+            cursorPlus.style.opacity = '0';
+            cursorMinus.style.opacity = '0';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            cursorPlus.style.opacity = '1';
+            cursorMinus.style.opacity = '1';
+        });
+
+        // Start animation loop
+        updateCursor();
     </script>
 </body>
 </html>
