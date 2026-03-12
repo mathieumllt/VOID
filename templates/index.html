@@ -4,12 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VOID</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕳️</text></svg>">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             cursor: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           VOID SHAKE - Every 11 seconds
+           ═══════════════════════════════════════════════════════════ */
+        
+        @keyframes voidShake {
+            0%, 95% { transform: translate(0, 0) rotate(0deg); }
+            95.5% { transform: translate(-3px, -2px) rotate(-0.5deg); }
+            96% { transform: translate(3px, 2px) rotate(0.5deg); }
+            96.5% { transform: translate(-2px, 3px) rotate(-0.3deg); }
+            97% { transform: translate(2px, -3px) rotate(0.3deg); }
+            97.5% { transform: translate(-3px, 1px) rotate(-0.5deg); }
+            98% { transform: translate(3px, -1px) rotate(0.5deg); }
+            98.5% { transform: translate(-1px, 2px) rotate(-0.2deg); }
+            99% { transform: translate(1px, -2px) rotate(0.2deg); }
+            99.5% { transform: translate(-2px, 1px) rotate(-0.3deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .container {
+            animation: 
         }
 
         /* ═══════════════════════════════════════════════════════════
@@ -134,14 +157,62 @@
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+            background: transparent;
+            border: none;
             max-width: 650px;
             width: 100%;
             padding: 40px;
             position: relative;
             z-index: 2;
+        }
+
+
+        @import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+
+        
+
+       
+
+        .marquee {
+            position: relative;
+            width: 100%;
+            height: 2em;
+            font-size: 5em;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .marquee_text {
+            position: absolute;
+            min-width: 100%;
+            white-space: nowrap;
+            animation: marquee 16s infinite linear;
+        }
+
+        @keyframes marquee {
+            from { translate: 70%; }
+            to { translate: -70%; }
+        }
+
+        .marquee_blur {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            /* background-color: black; */
+            /* background-image: linear-gradient(to right, white, 1rem, transparent 50%), linear-gradient(to left, white, 1rem, transparent 50%); */
+            filter: contrast(15);
+            
+        .marquee_blur p {
+            filter: blur(0.07em);
+        }
+
+        .marquee_clear {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
         }
 
         /* LOGO - B&W Enter the Void */
@@ -157,21 +228,22 @@
         .logo {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-weight: 100;
-            font-size: 56px;
+            font-size: 44px;
             letter-spacing: 18px;
-            text-transform: uppercase;
+            text-align: center;
             color: #fff;
             animation: flicker 8s infinite;
-            margin-bottom: 8px;
+            margin-bottom: 11px;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
         .subtitle {
-            color: #666;
+            color: #131277;
             margin-bottom: 35px;
-            font-size: 10px;
-            letter-spacing: 1px;
+            font-size: 9px;
+            letter-spacing: -18px;
             font-style: italic;
+            text-align: center;
         }
 
         .form-row {
@@ -252,9 +324,9 @@
         button[type="submit"] {
             width: 100%;
             padding: 14px;
-            background: #fff;
-            color: #000;
-            border: none;
+            background: #000;
+            color: #fff;
+            border: 1px solid rgb(255 255 255 / 66%);
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 11px;
             font-weight: 600;
@@ -262,7 +334,6 @@
             transition: all 0.3s;
             letter-spacing: 3px;
             text-transform: uppercase;
-        }
 
         button[type="submit"]:hover:not(:disabled) {
             background: transparent;
@@ -435,6 +506,121 @@
             color: #444;
         }
 
+        /* ═══════════════════════════════════════════════════════════
+           META VOTE - Vote the vote (unlocks at 3+ votes)
+           ═══════════════════════════════════════════════════════════ */
+        
+        .meta-vote-section {
+            display: none;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 9px;
+            color: #444;
+        }
+
+        .meta-vote-section.unlocked {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .meta-vote-section .meta-label {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        .meta-vote-btn {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #444;
+            font-size: 8px;
+            padding: 2px 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .meta-vote-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #888;
+        }
+
+        .meta-vote-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .meta-score {
+            color: #555;
+            font-size: 9px;
+            min-width: 16px;
+            text-align: center;
+        }
+
+        .meta-score.positive { color: #888; }
+        .meta-score.negative { color: #333; }
+
+        /* ═══════════════════════════════════════════════════════════
+           EDIT FORM
+           ═══════════════════════════════════════════════════════════ */
+        
+        .edit-section {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .edit-section.show {
+            display: block;
+        }
+
+        .edit-section label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .edit-section input {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-family: inherit;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .edit-section button {
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #888;
+            cursor: pointer;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .edit-section button:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        .edited-badge {
+            font-size: 8px;
+            color: #444;
+            letter-spacing: 1px;
+            margin-left: 6px;
+        }
+
         .restricted-message {
             display: none;
             padding: 15px;
@@ -449,6 +635,98 @@
 
         .restricted-message.show {
             display: block;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           MEDIA EMBED STYLES
+           ═══════════════════════════════════════════════════════════ */
+        
+        .media-preview {
+            margin-top: 10px;
+            display: none;
+        }
+
+        .media-preview.show {
+            display: block;
+        }
+
+        .media-preview img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .media-preview .platform-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            font-size: 9px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.1);
+            color: #888;
+            margin-top: 8px;
+        }
+
+        .idea-media {
+            margin-bottom: 12px;
+        }
+
+        .idea-media iframe {
+            width: 100%;
+            border: none;
+            background: #111;
+        }
+
+        .idea-media.youtube iframe {
+            height: 180px;
+        }
+
+        .idea-media.soundcloud iframe {
+            height: 166px;
+        }
+
+        .idea-media .media-thumbnail {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .idea-media .media-thumbnail img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            filter: grayscale(30%);
+            transition: all 0.3s;
+        }
+
+        .idea-media .media-thumbnail:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        .idea-media .media-thumbnail .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .idea-media .media-thumbnail:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .idea-media .platform-label {
+            font-size: 9px;
+            color: #555;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 6px;
         }
 
         @media (max-width: 600px) {
@@ -469,6 +747,9 @@
             .form-group.half {
                 margin-bottom: 0;
             }
+            .idea-media.youtube iframe {
+                height: 150px;
+            }
         }
     </style>
 </head>
@@ -486,11 +767,26 @@
 
     <div class="container">
         <div class="content">
-            <div class="logo">VOID</div>
-            <p class="subtitle">C̶̢͔̓͝é̶͌ͅḷ̶̦̈͘e̵̡̬͆̌b̶̬̊͝r̸̳͕̓e̴̙̒̕r̴̬̼̿ ̶̼̕p̵͕̼͆̿ọ̵̍͐u̶̜̓ͅr̵̜̔͆ ̶͚͠c̴͇̃è̷̻̖͛u̸̲͙͛̏x̴̥̀͂ ̴̼̱͘͝q̴͖̓̉u̷͔̗̅ī̶̡ ̶̯̈̊ņ̴̞̅e̵̲̮̍̚ ̴͇̳̚c̸͕̑ę̶̑̽l̸͕̣̈́̌ę̸̲́b̸͚̎̕r̵͈̅̎ë̴́̋ͅn̴̹̲̅t̴̬͒ ̷̢͚̄ṕ̵̜ä̸̖̥́s̷̠̗̋̚ ̷͙͛͌ ̶̡̧̣̩̝̹͎̯̺̪̅̀</p>
+            <div class="marquee">
+                <div class="marquee_blur" aria-hidden="true">
+                  <p class="marquee_text">VOID</p>
+                </div>
+                <div class="marquee_clear">
+                  <p class="marquee_text">VOID</p>
+                </div>
+              </div>
+            <p class="subtitle">C̶̢͔̓͝é̶͌ͅḷ̶̦̈͘e̵̡̬͆̌b̶̬̊͝r̸̳͕̓e̴̙̒̕r̴̬̼̿ ̶̼̕p̵͕̼͆̿ọ̵̍͐u̶̜̓ͅr̵̜̔͆ ̶͚͠c̴͇̃è̷̻̖͛u̸̲͙͛̏x̴̥̀͂ ̴̼̱͘͝q̴͖̓̉u̷͔̗̅ī̶̡ ̶̯̈̊ņ̴̞̅e̵̲̮̍̚ ̴͇̳̚c̸͕̑ę̶̑̽l̸͕̣̈́̌ę̸̲́b̸͚̎̕r̵͈̅̎ë̴́̋ͅn̴̹̲̅t̴̬͒ ̷̢͚̄ṕ̵̜ä̸̖̥́s̷̠̗̋̚ ̷͙͛͌ ̶̡̧̣̩̝̹͎̯̺̪̅̀
+
+</p>
 
             <div class="restricted-message" id="restrictedMessage">
                 tu as déjà parlé
+            </div>
+
+            <div class="edit-section" id="editSection">
+                <label for="editText">modifier ton message (une seule fois)</label>
+                <input type="text" id="editText" maxlength="44" placeholder="...">
+                <button type="button" id="editBtn">modifier</button>
             </div>
 
             <form id="ideaForm">
@@ -506,16 +802,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="idea">ton message</label>
+                    <label for="idea">ton message (optionnel si track)</label>
                     <textarea 
                         id="idea" 
                         name="idea" 
                         placeholder="..."
-                        required
+                        maxlength="44"
                     ></textarea>
                     <div class="char-count">
-                        <span id="charCount">0</span> / 500
+                        <span id="charCount">0</span> / 44
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mediaUrl">🎵 lien track (youtube, soundcloud, bandcamp)</label>
+                    <input type="url" id="mediaUrl" name="mediaUrl" placeholder="https://...">
+                    <div class="media-preview" id="mediaPreview"></div>
                 </div>
 
                 <button type="submit" id="submitBtn">envoyer</button>
@@ -553,18 +855,21 @@
                     vec2 uv = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
                     vec2 uv0 = uv;
                     float finalColor = 0.0;
-                    float slowTime = u_time * 0.04;
+                    float slowTime = u_time * 0.08;
 
-                    for (float i = 0.0; i < 3.0; i++) {
-                        uv = fract(uv * 1.2) - 0.5;
-                        float d = length(uv) * exp(-length(uv0) * 0.5);
-                        d = sin(d * 4.0 + slowTime * 1.2 + i * 0.4) / 4.0;
+                    for (float i = 0.0; i < 4.0; i++) {
+                        uv = fract(uv * 1.5) - 0.5;
+                        float d = length(uv) * exp(-length(uv0) * 0.3);
+                        d = sin(d * 6.0 + slowTime * 1.5 + i * 0.5) / 3.0;
                         d = abs(d);
-                        d = pow(0.005 / d, 0.85);
-                        finalColor += d * (0.25 - i * 0.06);
+                        d = pow(0.008 / d, 1.1);
+                        finalColor += d * (0.4 - i * 0.08);
                     }
 
-                    finalColor = finalColor * 0.04;
+                    // More visible - 15% opacity instead of 4%
+                    finalColor = finalColor * 0.15;
+                    // Add subtle pulse
+                    finalColor *= 0.85 + 0.15 * sin(u_time * 0.3);
                     gl_FragColor = vec4(vec3(finalColor), 1.0);
                 }
             `;
@@ -632,6 +937,8 @@
         const ideaTextarea = document.getElementById('idea');
         const pseudoInput = document.getElementById('pseudo');
         const ageInput = document.getElementById('age');
+        const mediaUrlInput = document.getElementById('mediaUrl');
+        const mediaPreview = document.getElementById('mediaPreview');
         const charCount = document.getElementById('charCount');
         const messageDiv = document.getElementById('message');
         const statsDiv = document.getElementById('stats');
@@ -639,9 +946,70 @@
         const submitBtn = document.getElementById('submitBtn');
         const restrictedMessage = document.getElementById('restrictedMessage');
 
+        let currentMedia = null;
+
         ideaTextarea.addEventListener('input', () => {
             charCount.textContent = ideaTextarea.value.length;
         });
+
+        // Media URL preview with debounce
+        let previewTimeout;
+        mediaUrlInput.addEventListener('input', () => {
+            clearTimeout(previewTimeout);
+            const url = mediaUrlInput.value.trim();
+            
+            if (!url) {
+                mediaPreview.classList.remove('show');
+                mediaPreview.innerHTML = '';
+                currentMedia = null;
+                return;
+            }
+
+            previewTimeout = setTimeout(async () => {
+                try {
+                    const response = await fetch('/api/preview-media', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ url })
+                    });
+                    const data = await response.json();
+                    
+                    if (data.success && data.media) {
+                        currentMedia = data.media;
+                        let previewHtml = '';
+                        
+                        if (data.media.platform === 'youtube' && data.media.thumbnail) {
+                            previewHtml = `
+                                <img src="${data.media.thumbnail}" alt="YouTube thumbnail">
+                                <div class="platform-badge">▶ youtube</div>
+                            `;
+                        } else if (data.media.platform === 'soundcloud') {
+                            previewHtml = `
+                                <div class="platform-badge">☁ soundcloud</div>
+                            `;
+                        } else if (data.media.platform === 'bandcamp') {
+                            previewHtml = `
+                                <div class="platform-badge">◆ bandcamp</div>
+                            `;
+                        }
+                        
+                        mediaPreview.innerHTML = previewHtml;
+                        mediaPreview.classList.add('show');
+                    } else {
+                        mediaPreview.innerHTML = '<div class="platform-badge">⚠ lien non reconnu</div>';
+                        mediaPreview.classList.add('show');
+                        currentMedia = null;
+                    }
+                } catch (error) {
+                    mediaPreview.classList.remove('show');
+                    currentMedia = null;
+                }
+            }, 500);
+        });
+
+        const editSection = document.getElementById('editSection');
+        const editText = document.getElementById('editText');
+        const editBtn = document.getElementById('editBtn');
 
         async function checkIpStatus() {
             try {
@@ -650,6 +1018,12 @@
                 if (data.has_submitted) {
                     restrictedMessage.classList.add('show');
                     ideaForm.style.display = 'none';
+                    
+                    // Show edit section if can edit
+                    if (data.can_edit && data.user_idea) {
+                        editSection.classList.add('show');
+                        editText.value = data.user_idea.text || '';
+                    }
                 }
                 updateStats(data.total_ideas);
             } catch (error) {
@@ -657,14 +1031,52 @@
             }
         }
 
+        // Handle edit
+        editBtn.addEventListener('click', async () => {
+            const newText = editText.value.trim();
+            
+            if (newText.length > 44) {
+                showMessage('44 caractères max', 'error');
+                return;
+            }
+
+            editBtn.disabled = true;
+            editBtn.textContent = 'envoi...';
+
+            try {
+                const response = await fetch('/api/edit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: newText })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showMessage('modifié', 'success');
+                    editSection.classList.remove('show');
+                    loadIdeas();
+                } else {
+                    showMessage(data.message, 'error');
+                }
+            } catch (error) {
+                showMessage('erreur', 'error');
+            } finally {
+                editBtn.disabled = false;
+                editBtn.textContent = 'modifier';
+            }
+        });
+
         ideaForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const ideaText = ideaTextarea.value.trim();
             const pseudo = pseudoInput.value.trim();
             const age = ageInput.value ? parseInt(ageInput.value) : null;
+            const mediaUrl = mediaUrlInput.value.trim();
 
-            if (!ideaText) {
-                showMessage('message vide', 'error');
+            // Require either text or media
+            if (!ideaText && !mediaUrl) {
+                showMessage('message ou lien requis', 'error');
                 return;
             }
 
@@ -675,7 +1087,12 @@
                 const response = await fetch('/api/submit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ idea: ideaText, pseudo: pseudo, age: age })
+                    body: JSON.stringify({ 
+                        idea: ideaText, 
+                        pseudo: pseudo, 
+                        age: age,
+                        media_url: mediaUrl
+                    })
                 });
 
                 const data = await response.json();
@@ -684,6 +1101,9 @@
                     showMessage('transmis', 'success');
                     ideaForm.reset();
                     charCount.textContent = '0';
+                    mediaPreview.classList.remove('show');
+                    mediaPreview.innerHTML = '';
+                    currentMedia = null;
                     restrictedMessage.classList.add('show');
                     ideaForm.style.display = 'none';
                     updateStats(data.total_ideas);
@@ -736,6 +1156,70 @@
         // Make handleVote global
         window.handleVote = handleVote;
 
+        // Render media embed HTML
+        function renderMediaEmbed(media) {
+            if (!media) return '';
+            
+            if (media.platform === 'youtube') {
+                return `
+                    <div class="idea-media youtube">
+                        <iframe 
+                            src="${media.embed_url}" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                `;
+            } else if (media.platform === 'soundcloud') {
+                return `
+                    <div class="idea-media soundcloud">
+                        <iframe 
+                            src="${media.embed_url}" 
+                            scrolling="no" 
+                            frameborder="no" 
+                            allow="autoplay">
+                        </iframe>
+                    </div>
+                `;
+            } else if (media.platform === 'bandcamp') {
+                return `
+                    <div class="idea-media bandcamp">
+                        <a href="${media.url}" target="_blank" class="media-thumbnail">
+                            <div class="play-overlay">◆</div>
+                            <div class="platform-label">écouter sur bandcamp →</div>
+                        </a>
+                    </div>
+                `;
+            }
+            return '';
+        }
+
+        // Handle meta vote
+        async function handleMetaVote(ideaId, voteType, btn) {
+            btn.classList.add('voting');
+            setTimeout(() => btn.classList.remove('voting'), 300);
+
+            try {
+                const response = await fetch('/api/meta-vote', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        idea_id: ideaId, 
+                        vote: btn.classList.contains('active') ? 0 : voteType
+                    })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    loadIdeas();
+                }
+            } catch (error) {
+                console.error('meta vote error:', error);
+            }
+        }
+
+        window.handleMetaVote = handleMetaVote;
+
         async function loadIdeas() {
             try {
                 const response = await fetch('/api/ideas');
@@ -756,13 +1240,31 @@
                     const upActive = idea.user_vote === 1 ? 'active' : '';
                     const downActive = idea.user_vote === -1 ? 'active' : '';
                     const ageDisplay = idea.age ? `, ${idea.age} ans` : '';
+                    const editedBadge = idea.edited ? '<span class="edited-badge">(modifié)</span>' : '';
+                    
+                    // Meta vote (unlocks at 3+ votes)
+                    const metaScoreClass = idea.meta_score > 0 ? 'positive' : idea.meta_score < 0 ? 'negative' : '';
+                    const metaUpActive = idea.user_meta_vote === 1 ? 'active' : '';
+                    const metaDownActive = idea.user_meta_vote === -1 ? 'active' : '';
+                    const metaUnlocked = idea.can_meta_vote ? 'unlocked' : '';
+                    
+                    // Priority: media first, then text
+                    const mediaHtml = renderMediaEmbed(idea.media);
+                    const textHtml = idea.text ? `<div class="idea-text">${idea.text}</div>` : '';
                     
                     html += `
                         <div class="idea-item">
                             <div class="idea-content">
-                                <div class="idea-text">${idea.text}</div>
+                                ${mediaHtml}
+                                ${textHtml}
                                 <div class="idea-meta">
-                                    <span class="idea-pseudo">${idea.pseudo}${ageDisplay}</span> · ${date}
+                                    <span class="idea-pseudo">${idea.pseudo}${ageDisplay}</span>${editedBadge} · ${date}
+                                </div>
+                                <div class="meta-vote-section ${metaUnlocked}">
+                                    <span class="meta-label">voter le vote:</span>
+                                    <button class="meta-vote-btn ${metaUpActive}" onclick="handleMetaVote(${idea.id}, 1, this)">▲</button>
+                                    <span class="meta-score ${metaScoreClass}">${idea.meta_score}</span>
+                                    <button class="meta-vote-btn ${metaDownActive}" onclick="handleMetaVote(${idea.id}, -1, this)">▼</button>
                                 </div>
                             </div>
                             <div class="vote-section">
