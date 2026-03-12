@@ -239,7 +239,8 @@ def get_ideas():
         vote_key = f"{ip}_{idea['id']}"
         meta_vote_key = f"{ip}_meta_{idea['id']}"
         
-        total_votes = idea['upvotes'] + idea['downvotes']
+        # Meta vote unlocks at 10+ upvotes (not total votes)
+        can_meta = idea['upvotes'] >= 10
         
         ideas.append({
             'id': idea['id'],
@@ -253,7 +254,7 @@ def get_ideas():
             'score': idea['upvotes'] - idea['downvotes'],
             'user_vote': data['votes'].get(vote_key, 0),
             'edited': idea.get('edited', False),
-            'can_meta_vote': total_votes >= 3,
+            'can_meta_vote': can_meta,
             'meta_up': idea.get('meta_up', 0),
             'meta_down': idea.get('meta_down', 0),
             'meta_score': idea.get('meta_up', 0) - idea.get('meta_down', 0),
@@ -317,7 +318,7 @@ def vote():
 
 @app.route('/api/meta-vote', methods=['POST'])
 def meta_vote():
-    """Vote on the vote - only available when idea has 3+ votes"""
+    """Vote on the vote - only available when idea has 10+ upvotes"""
     data = load_data()
     ip = get_client_ip()
     
@@ -334,10 +335,9 @@ def meta_vote():
     if not idea:
         return jsonify({'success': False, 'message': 'Idea not found'}), 404
     
-    # Check if meta voting is allowed (3+ votes)
-    total_votes = idea['upvotes'] + idea['downvotes']
-    if total_votes < 3:
-        return jsonify({'success': False, 'message': 'Pas assez de votes'}), 400
+    # Check if meta voting is allowed (10+ upvotes)
+    if idea['upvotes'] < 10:
+        return jsonify({'success': False, 'message': 'Pas assez de votes positifs'}), 400
     
     meta_vote_key = f"{ip}_meta_{idea_id}"
     old_vote = data['meta_votes'].get(meta_vote_key, 0)

@@ -6,6 +6,8 @@
     <title>VOID</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕳️</text></svg>">
     <style>
+        @import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+
         * {
             margin: 0;
             padding: 0;
@@ -29,10 +31,6 @@
             99% { transform: translate(1px, -2px) rotate(0.2deg); }
             99.5% { transform: translate(-2px, 1px) rotate(-0.3deg); }
             100% { transform: translate(0, 0) rotate(0deg); }
-        }
-
-        .container {
-            animation: 
         }
 
         /* ═══════════════════════════════════════════════════════════
@@ -84,7 +82,6 @@
                 opacity 0.3s ease;
         }
 
-        /* Hover states */
         .cursor-plus.hovering {
             transform: translate(-50%, -50%) scale(1.2);
             text-shadow: 
@@ -97,7 +94,6 @@
             opacity: 0.4;
         }
 
-        /* Click animation */
         @keyframes cursorPulse {
             0% { transform: translate(-50%, -50%) scale(1); }
             50% { transform: translate(-50%, -50%) scale(1.4); }
@@ -147,8 +143,8 @@
             height: 100%;
             background: repeating-linear-gradient(
                 0deg,
-                rgba(0, 0, 0, 7.1),
-                rgba(0, 0, 0, 1.1) 1px,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
                 transparent 1px,
                 transparent 2px
             );
@@ -164,14 +160,8 @@
             padding: 40px;
             position: relative;
             z-index: 2;
+            animation: voidShake 11s infinite;
         }
-
-
-        @import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
-
-        
-
-    
 
         /* LOGO - B&W Enter the Void */
         @keyframes flicker {
@@ -199,7 +189,7 @@
             color: #131277;
             margin-bottom: 35px;
             font-size: 9px;
-            letter-spacing: -18px;
+            letter-spacing: -1px;
             font-style: italic;
             text-align: center;
         }
@@ -229,7 +219,8 @@
         }
 
         input[type="text"],
-        input[type="number"] {
+        input[type="number"],
+        input[type="url"] {
             width: 100%;
             padding: 12px;
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -284,7 +275,7 @@
             padding: 14px;
             background: #000;
             color: #fff;
-            border: 1px solid rgb(255 255 255 / 66%);
+            border: 1px solid rgba(255, 255, 255, 0.66);
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 11px;
             font-weight: 600;
@@ -292,6 +283,7 @@
             transition: all 0.3s;
             letter-spacing: 3px;
             text-transform: uppercase;
+        }
 
         button[type="submit"]:hover:not(:disabled) {
             background: transparent;
@@ -395,7 +387,6 @@
             gap: 4px;
         }
 
-        /* Vote button with animation */
         @keyframes votePulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.3); }
@@ -465,7 +456,7 @@
         }
 
         /* ═══════════════════════════════════════════════════════════
-           META VOTE - Vote the vote (unlocks at 3+ votes)
+           META VOTE - Vote the vote (unlocks at 10+ upvotes)
            ═══════════════════════════════════════════════════════════ */
         
         .meta-vote-section {
@@ -712,9 +703,6 @@
     </style>
 </head>
 <body>
-    <!-- ═══════════════════════════════════════════════════════════
-         MAGNETIC CURSOR - Plus follows mouse, Minus repels
-         ═══════════════════════════════════════════════════════════ -->
     <div class="cursor-container">
         <div class="cursor-plus">+</div>
         <div class="cursor-minus">−</div>
@@ -726,9 +714,7 @@
     <div class="container">
         <div class="content">
             <div class="logo">VOID</div>
-            <p class="subtitle">C̶̢͔̓͝é̶͌ͅḷ̶̦̈͘e̵̡̬͆̌b̶̬̊͝r̸̳͕̓e̴̙̒̕r̴̬̼̿ ̶̼̕p̵͕̼͆̿ọ̵̍͐u̶̜̓ͅr̵̜̔͆ ̶͚͠c̴͇̃è̷̻̖͛u̸̲͙͛̏x̴̥̀͂ ̴̼̱͘͝q̴͖̓̉u̷͔̗̅ī̶̡ ̶̯̈̊ņ̴̞̅e̵̲̮̍̚ ̴͇̳̚c̸͕̑ę̶̑̽l̸͕̣̈́̌ę̸̲́b̸͚̎̕r̵͈̅̎ë̴́̋ͅn̴̹̲̅t̴̬͒ ̷̢͚̄ṕ̵̜ä̸̖̥́s̷̠̗̋̚ ̷͙͛͌ ̶̡̧̣̩̝̹͎̯̺̪̅̀
-
-</p>
+            <p class="subtitle">C̶̢͔̓͝é̶͌ͅḷ̶̦̈͘e̵̡̬͆̌b̶̬̊͝r̸̳͕̓e̴̙̒̕r̴̬̼̿ ̶̼̕p̵͕̼͆̿ọ̵̍͐u̶̜̓ͅr̵̜̔͆ ̶͚͠c̴͇̃è̷̻̖͛u̸̲͙͛̏x̴̥̀͂ ̴̼̱͘͝q̴͖̓̉u̷͔̗̅ī̶̡ ̶̯̈̊ņ̴̞̅e̵̲̮̍̚ ̴͇̳̚c̸͕̑ę̶̑̽l̸͕̣̈́̌ę̸̲́b̸͚̎̕r̵͈̅̎ë̴́̋ͅn̴̹̲̅t̴̬͒ ̷̢͚̄ṕ̵̜ä̸̖̥́s̷̠̗̋̚</p>
 
             <div class="restricted-message" id="restrictedMessage">
                 tu as déjà parlé
@@ -785,7 +771,6 @@
     </div>
 
     <script>
-        // WebGL Fractal Background - B&W Enter the Void style
         const canvas = document.getElementById('fractalCanvas');
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
@@ -817,9 +802,7 @@
                         finalColor += d * (0.4 - i * 0.08);
                     }
 
-                    // More visible - 15% opacity instead of 4%
                     finalColor = finalColor * 0.15;
-                    // Add subtle pulse
                     finalColor *= 0.85 + 0.15 * sin(u_time * 0.3);
                     gl_FragColor = vec4(vec3(finalColor), 1.0);
                 }
@@ -883,7 +866,6 @@
             render();
         }
 
-        // App Logic
         const ideaForm = document.getElementById('ideaForm');
         const ideaTextarea = document.getElementById('idea');
         const pseudoInput = document.getElementById('pseudo');
@@ -903,7 +885,6 @@
             charCount.textContent = ideaTextarea.value.length;
         });
 
-        // Media URL preview with debounce
         let previewTimeout;
         mediaUrlInput.addEventListener('input', () => {
             clearTimeout(previewTimeout);
@@ -930,18 +911,11 @@
                         let previewHtml = '';
                         
                         if (data.media.platform === 'youtube' && data.media.thumbnail) {
-                            previewHtml = `
-                                <img src="${data.media.thumbnail}" alt="YouTube thumbnail">
-                                <div class="platform-badge">▶ youtube</div>
-                            `;
+                            previewHtml = `<img src="${data.media.thumbnail}" alt="YouTube thumbnail"><div class="platform-badge">▶ youtube</div>`;
                         } else if (data.media.platform === 'soundcloud') {
-                            previewHtml = `
-                                <div class="platform-badge">☁ soundcloud</div>
-                            `;
+                            previewHtml = `<div class="platform-badge">☁ soundcloud</div>`;
                         } else if (data.media.platform === 'bandcamp') {
-                            previewHtml = `
-                                <div class="platform-badge">◆ bandcamp</div>
-                            `;
+                            previewHtml = `<div class="platform-badge">◆ bandcamp</div>`;
                         }
                         
                         mediaPreview.innerHTML = previewHtml;
@@ -969,8 +943,6 @@
                 if (data.has_submitted) {
                     restrictedMessage.classList.add('show');
                     ideaForm.style.display = 'none';
-                    
-                    // Show edit section if can edit
                     if (data.can_edit && data.user_idea) {
                         editSection.classList.add('show');
                         editText.value = data.user_idea.text || '';
@@ -982,27 +954,21 @@
             }
         }
 
-        // Handle edit
         editBtn.addEventListener('click', async () => {
             const newText = editText.value.trim();
-            
             if (newText.length > 44) {
                 showMessage('44 caractères max', 'error');
                 return;
             }
-
             editBtn.disabled = true;
             editBtn.textContent = 'envoi...';
-
             try {
                 const response = await fetch('/api/edit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ text: newText })
                 });
-
                 const data = await response.json();
-
                 if (data.success) {
                     showMessage('modifié', 'success');
                     editSection.classList.remove('show');
@@ -1024,30 +990,19 @@
             const pseudo = pseudoInput.value.trim();
             const age = ageInput.value ? parseInt(ageInput.value) : null;
             const mediaUrl = mediaUrlInput.value.trim();
-
-            // Require either text or media
             if (!ideaText && !mediaUrl) {
                 showMessage('message ou lien requis', 'error');
                 return;
             }
-
             submitBtn.disabled = true;
             submitBtn.textContent = 'envoi...';
-
             try {
                 const response = await fetch('/api/submit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        idea: ideaText, 
-                        pseudo: pseudo, 
-                        age: age,
-                        media_url: mediaUrl
-                    })
+                    body: JSON.stringify({ idea: ideaText, pseudo: pseudo, age: age, media_url: mediaUrl })
                 });
-
                 const data = await response.json();
-
                 if (data.success) {
                     showMessage('transmis', 'success');
                     ideaForm.reset();
@@ -1081,89 +1036,46 @@
         }
 
         async function handleVote(ideaId, voteType, btn) {
-            // Add animation
             btn.classList.add('voting');
             setTimeout(() => btn.classList.remove('voting'), 300);
-
             try {
                 const response = await fetch('/api/vote', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        idea_id: ideaId, 
-                        vote: btn.classList.contains('active') ? 0 : voteType
-                    })
+                    body: JSON.stringify({ idea_id: ideaId, vote: btn.classList.contains('active') ? 0 : voteType })
                 });
-
                 const data = await response.json();
-                if (data.success) {
-                    loadIdeas();
-                }
+                if (data.success) loadIdeas();
             } catch (error) {
                 console.error('vote error:', error);
             }
         }
 
-        // Make handleVote global
         window.handleVote = handleVote;
 
-        // Render media embed HTML
         function renderMediaEmbed(media) {
             if (!media) return '';
-            
             if (media.platform === 'youtube') {
-                return `
-                    <div class="idea-media youtube">
-                        <iframe 
-                            src="${media.embed_url}" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                `;
+                return `<div class="idea-media youtube"><iframe src="${media.embed_url}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
             } else if (media.platform === 'soundcloud') {
-                return `
-                    <div class="idea-media soundcloud">
-                        <iframe 
-                            src="${media.embed_url}" 
-                            scrolling="no" 
-                            frameborder="no" 
-                            allow="autoplay">
-                        </iframe>
-                    </div>
-                `;
+                return `<div class="idea-media soundcloud"><iframe src="${media.embed_url}" scrolling="no" frameborder="no" allow="autoplay"></iframe></div>`;
             } else if (media.platform === 'bandcamp') {
-                return `
-                    <div class="idea-media bandcamp">
-                        <a href="${media.url}" target="_blank" class="media-thumbnail">
-                            <div class="play-overlay">◆</div>
-                            <div class="platform-label">écouter sur bandcamp →</div>
-                        </a>
-                    </div>
-                `;
+                return `<div class="idea-media bandcamp"><a href="${media.url}" target="_blank" class="media-thumbnail"><div class="play-overlay">◆</div><div class="platform-label">écouter sur bandcamp →</div></a></div>`;
             }
             return '';
         }
 
-        // Handle meta vote
         async function handleMetaVote(ideaId, voteType, btn) {
             btn.classList.add('voting');
             setTimeout(() => btn.classList.remove('voting'), 300);
-
             try {
                 const response = await fetch('/api/meta-vote', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        idea_id: ideaId, 
-                        vote: btn.classList.contains('active') ? 0 : voteType
-                    })
+                    body: JSON.stringify({ idea_id: ideaId, vote: btn.classList.contains('active') ? 0 : voteType })
                 });
-
                 const data = await response.json();
-                if (data.success) {
-                    loadIdeas();
-                }
+                if (data.success) loadIdeas();
             } catch (error) {
                 console.error('meta vote error:', error);
             }
@@ -1175,31 +1087,22 @@
             try {
                 const response = await fetch('/api/ideas');
                 const data = await response.json();
-
                 if (data.ideas.length === 0) {
                     ideasListDiv.innerHTML = '';
                     return;
                 }
-
                 let html = '<h3>void</h3>';
                 data.ideas.forEach(idea => {
-                    const date = new Date(idea.timestamp).toLocaleDateString('fr-FR', { 
-                        day: '2-digit',
-                        month: '2-digit'
-                    });
+                    const date = new Date(idea.timestamp).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
                     const scoreClass = idea.score > 0 ? 'positive' : idea.score < 0 ? 'negative' : '';
                     const upActive = idea.user_vote === 1 ? 'active' : '';
                     const downActive = idea.user_vote === -1 ? 'active' : '';
                     const ageDisplay = idea.age ? `, ${idea.age} ans` : '';
                     const editedBadge = idea.edited ? '<span class="edited-badge">(modifié)</span>' : '';
-                    
-                    // Meta vote (unlocks at 3+ votes)
                     const metaScoreClass = idea.meta_score > 0 ? 'positive' : idea.meta_score < 0 ? 'negative' : '';
                     const metaUpActive = idea.user_meta_vote === 1 ? 'active' : '';
                     const metaDownActive = idea.user_meta_vote === -1 ? 'active' : '';
                     const metaUnlocked = idea.can_meta_vote ? 'unlocked' : '';
-                    
-                    // Priority: media first, then text
                     const mediaHtml = renderMediaEmbed(idea.media);
                     const textHtml = idea.text ? `<div class="idea-text">${idea.text}</div>` : '';
                     
@@ -1208,9 +1111,7 @@
                             <div class="idea-content">
                                 ${mediaHtml}
                                 ${textHtml}
-                                <div class="idea-meta">
-                                    <span class="idea-pseudo">${idea.pseudo}${ageDisplay}</span>${editedBadge} · ${date}
-                                </div>
+                                <div class="idea-meta"><span class="idea-pseudo">${idea.pseudo}${ageDisplay}</span>${editedBadge} · ${date}</div>
                                 <div class="meta-vote-section ${metaUnlocked}">
                                     <span class="meta-label">voter le vote:</span>
                                     <button class="meta-vote-btn ${metaUpActive}" onclick="handleMetaVote(${idea.id}, 1, this)">▲</button>
@@ -1226,7 +1127,6 @@
                         </div>
                     `;
                 });
-
                 ideasListDiv.innerHTML = html;
             } catch (error) {
                 console.error('load error:', error);
@@ -1237,126 +1137,52 @@
         loadIdeas();
         setInterval(loadIdeas, 10000);
 
-        /* ═══════════════════════════════════════════════════════════
-           MAGNETIC CURSOR SYSTEM
-           Plus (+) follows the mouse
-           Minus (−) repels away from Plus with magnetic effect
-           ═══════════════════════════════════════════════════════════ */
-        
         const cursorPlus = document.querySelector('.cursor-plus');
         const cursorMinus = document.querySelector('.cursor-minus');
         
-        // Cursor state
-        const cursor = {
-            x: window.innerWidth / 2,
-            y: window.innerHeight / 2,
-            plusX: window.innerWidth / 2,
-            plusY: window.innerHeight / 2,
-            minusX: window.innerWidth / 2 + 60,
-            minusY: window.innerHeight / 2,
-            repelDistance: 50,
-            repelStrength: 0.15,
-            isHovering: false
-        };
+        const cursor = { x: window.innerWidth / 2, y: window.innerHeight / 2, plusX: window.innerWidth / 2, plusY: window.innerHeight / 2, minusX: window.innerWidth / 2 + 60, minusY: window.innerHeight / 2, repelDistance: 50, repelStrength: 0.15, isHovering: false };
 
-        // Smooth animation with requestAnimationFrame
         function updateCursor() {
-            // Smooth follow for plus (main cursor)
             cursor.plusX += (cursor.x - cursor.plusX) * 0.2;
             cursor.plusY += (cursor.y - cursor.plusY) * 0.2;
-
-            // Calculate repel vector (minus runs away from plus)
             const dx = cursor.minusX - cursor.plusX;
             const dy = cursor.minusY - cursor.plusY;
             const distance = Math.sqrt(dx * dx + dy * dy);
-
-            // Normalize and apply repel force
             if (distance < cursor.repelDistance * 3) {
                 const force = (1 - distance / (cursor.repelDistance * 3)) * cursor.repelStrength;
-                const normalX = dx / (distance || 1);
-                const normalY = dy / (distance || 1);
-                
-                cursor.minusX += normalX * cursor.repelDistance * force;
-                cursor.minusY += normalY * cursor.repelDistance * force;
-                
+                cursor.minusX += (dx / (distance || 1)) * cursor.repelDistance * force;
+                cursor.minusY += (dy / (distance || 1)) * cursor.repelDistance * force;
                 cursorMinus.classList.add('repelling');
             } else {
                 cursorMinus.classList.remove('repelling');
             }
-
-            // Keep minus orbiting loosely around plus when far
-            const targetOrbitX = cursor.plusX + Math.cos(Date.now() * 0.001) * 70;
-            const targetOrbitY = cursor.plusY + Math.sin(Date.now() * 0.001) * 70;
-            
-            cursor.minusX += (targetOrbitX - cursor.minusX) * 0.02;
-            cursor.minusY += (targetOrbitY - cursor.minusY) * 0.02;
-
-            // Boundary constraints
+            cursor.minusX += (cursor.plusX + Math.cos(Date.now() * 0.001) * 70 - cursor.minusX) * 0.02;
+            cursor.minusY += (cursor.plusY + Math.sin(Date.now() * 0.001) * 70 - cursor.minusY) * 0.02;
             cursor.minusX = Math.max(20, Math.min(window.innerWidth - 20, cursor.minusX));
             cursor.minusY = Math.max(20, Math.min(window.innerHeight - 20, cursor.minusY));
-
-            // Apply positions
             cursorPlus.style.left = cursor.plusX + 'px';
             cursorPlus.style.top = cursor.plusY + 'px';
             cursorMinus.style.left = cursor.minusX + 'px';
             cursorMinus.style.top = cursor.minusY + 'px';
-
             requestAnimationFrame(updateCursor);
         }
 
-        // Mouse move handler
-        document.addEventListener('mousemove', (e) => {
-            cursor.x = e.clientX;
-            cursor.y = e.clientY;
-        });
-
-        // Click effect
+        document.addEventListener('mousemove', (e) => { cursor.x = e.clientX; cursor.y = e.clientY; });
         document.addEventListener('mousedown', () => {
             cursorPlus.classList.add('clicking');
             cursorMinus.classList.add('clicking');
-            
-            // Strong repel on click
             const dx = cursor.minusX - cursor.plusX;
             const dy = cursor.minusY - cursor.plusY;
             const distance = Math.sqrt(dx * dx + dy * dy) || 1;
             cursor.minusX += (dx / distance) * 40;
             cursor.minusY += (dy / distance) * 40;
         });
-
-        document.addEventListener('mouseup', () => {
-            cursorPlus.classList.remove('clicking');
-            cursorMinus.classList.remove('clicking');
-        });
-
-        // Hover detection for interactive elements
+        document.addEventListener('mouseup', () => { cursorPlus.classList.remove('clicking'); cursorMinus.classList.remove('clicking'); });
         const interactiveElements = 'a, button, input, textarea, [onclick]';
-        
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.matches(interactiveElements) || e.target.closest(interactiveElements)) {
-                cursorPlus.classList.add('hovering');
-                cursor.isHovering = true;
-            }
-        });
-
-        document.addEventListener('mouseout', (e) => {
-            if (e.target.matches(interactiveElements) || e.target.closest(interactiveElements)) {
-                cursorPlus.classList.remove('hovering');
-                cursor.isHovering = false;
-            }
-        });
-
-        // Hide cursor when leaving window
-        document.addEventListener('mouseleave', () => {
-            cursorPlus.style.opacity = '0';
-            cursorMinus.style.opacity = '0';
-        });
-
-        document.addEventListener('mouseenter', () => {
-            cursorPlus.style.opacity = '1';
-            cursorMinus.style.opacity = '1';
-        });
-
-        // Start animation loop
+        document.addEventListener('mouseover', (e) => { if (e.target.matches(interactiveElements) || e.target.closest(interactiveElements)) { cursorPlus.classList.add('hovering'); cursor.isHovering = true; } });
+        document.addEventListener('mouseout', (e) => { if (e.target.matches(interactiveElements) || e.target.closest(interactiveElements)) { cursorPlus.classList.remove('hovering'); cursor.isHovering = false; } });
+        document.addEventListener('mouseleave', () => { cursorPlus.style.opacity = '0'; cursorMinus.style.opacity = '0'; });
+        document.addEventListener('mouseenter', () => { cursorPlus.style.opacity = '1'; cursorMinus.style.opacity = '1'; });
         updateCursor();
     </script>
 </body>
